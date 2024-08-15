@@ -6,21 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSpecialtyUserTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('specialty_user', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id'); // Columna id autoincremental
 
-            //Doctor
+            // Doctor
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            //Specialty
+            // Specialty
             $table->unsignedBigInteger('specialty_id');
             $table->foreign('specialty_id')->references('id')->on('specialties')->onDelete('cascade');
 
@@ -28,11 +23,6 @@ class CreateSpecialtyUserTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('specialty_user');

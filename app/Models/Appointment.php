@@ -10,6 +10,9 @@ class Appointment extends Model
 {
     use HasFactory;
 
+    // El campo 'id' se maneja automáticamente por Eloquent
+    // No es necesario especificar 'id' en $fillable
+
     protected $fillable = [
         'scheduled_date',
         'scheduled_time',
@@ -17,7 +20,8 @@ class Appointment extends Model
         'description',
         'doctor_id',
         'patient_id',
-        'specialty_id'
+        'specialty_id',
+        'status' // Asegúrate de agregar 'status' si lo estás utilizando
     ];
 
     public function specialty() {
@@ -33,11 +37,12 @@ class Appointment extends Model
     }
 
     public function getScheduledTime12Attribute(){
-        return (new Carbon($this->scheduled_time))
-            ->format('g:i A');
+        return (new Carbon($this->scheduled_time))->format('g:i A');
     }
 
     public function cancellation() {
         return $this->hasOne(CancelledAppointment::class);
     }
 }
+
+

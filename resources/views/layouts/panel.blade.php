@@ -170,7 +170,7 @@
         const base_url = "{{ asset('/') }}";
         toastr.options.progressBar = true;
 
-        @if ($errors->any())
+        @if (isset($errors) && $errors instanceof Illuminate\Support\MessageBag && $errors->any())
             @foreach ($errors->all() as $error)
                 toastr.warning("{{ $error }}")
             @endforeach
